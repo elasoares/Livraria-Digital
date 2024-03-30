@@ -4,10 +4,10 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 export default function Card({ item, action }) {
   const { cover, title, genre, format, author, rating, synopsis } = item;
 
-  const configImage = { uri: cover[0] };
+  const configImage = { uri: cover };
 
   return (
-    <Pressable onPress={() => action(item)}>
+    <Pressable onPress={() => action(item)} style={[styles.container]}>
       <View style={styles.card}>
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={configImage} />
@@ -20,16 +20,10 @@ export default function Card({ item, action }) {
             {genre}
           </Text>
           <Text style={styles.author} key={`${item.id}_author`}>
-            {author}
+            Autor(a): {author}
           </Text>
           <Text style={styles.format} key={`${item.id}_format`}>
-            {format}
-          </Text>
-          <Text style={styles.rating} key={`${item.id}_rating`}>
-            {rating}
-          </Text>
-          <Text style={styles.synopsis} key={`${item.id}_synopsis`}>
-            {synopsis}
+            Formato: {format}
           </Text>
         </View>
       </View>
@@ -38,32 +32,35 @@ export default function Card({ item, action }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    width: "47%",
+    margin: 5,
+  },
   card: {
-    flexDirection: "row",
-    shadowColor: "#000",
-    shadowRadius: 1.84,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    elevation: 1,
-    marginVertical: 8,
-    marginHorizontal: 16,
-    padding: 8,
-    borderRadius: 8,
-    backgroundColor: "#FFF",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 5,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    width: "100%",
   },
   imageContainer: {
-    marginRight: 8,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   image: {
-    width: 100,
-    height: 100,
+    resizeMode: "cover",
+    width: "100%",
+    aspectRatio: 0.7,
     borderRadius: 8,
   },
   detailsContainer: {
     flex: 1,
+    marginVertical: 15,
   },
   title: {
     fontSize: 18,

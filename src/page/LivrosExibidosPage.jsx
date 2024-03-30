@@ -1,25 +1,30 @@
-import { ScrollView, Text, View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, Text, View, StyleSheet, Image } from "react-native";
 
 export default function LivrosExibidosPage(props) {
   const { params } = props.route;
 
+  const [image, setImage] = useState(0);
+
   const { cover, title, genre, format, author, rating, synopsis } = params;
 
-  const configImage = { uri: cover[0] };
+  const configImage = { uri: cover };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={configImage} />
       </View>
       <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.genre}>{genre}</Text>
-        <Text style={styles.author}>{author}</Text>
-        <Text style={styles.format}>{format}</Text>
+        <Text style={styles.title}>Título: {title}</Text>
+        <Text style={styles.genre}>Gênero: {genre}</Text>
+        <Text style={styles.author}>Autor(a): {author}</Text>
+        <Text style={styles.format}>Tipo: {format}</Text>
         <Text style={styles.rating}>{rating}</Text>
-        <ScrollView style={styles.synopsis}>{synopsis}</ScrollView>
+        <ScrollView style={styles.synopsis}>
+          <Text>{synopsis}</Text>
+        </ScrollView>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -28,15 +33,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageContainer: {
-    marginRight: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 8,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: "60%",
+    height: 350,
     borderRadius: 8,
   },
   detailsContainer: {
     flex: 1,
+    marginHorizontal: 10,
   },
   title: {
     fontSize: 18,
